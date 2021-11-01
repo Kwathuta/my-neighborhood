@@ -9,6 +9,7 @@ djangorestframework = "*"
 django-cloudinary-storage = "*"
 pillow = "*"
 cloudinary = "*"
+django-bootstrap5 = "*"
 
 [dev-packages]
 autopep8 = "*"
