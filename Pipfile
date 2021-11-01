@@ -10,6 +10,7 @@ django-cloudinary-storage = "*"
 pillow = "*"
 cloudinary = "*"
 django-bootstrap5 = "*"
+django-registration = "*"
 
 [dev-packages]
 autopep8 = "*"
