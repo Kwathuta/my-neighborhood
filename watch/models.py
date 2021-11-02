@@ -40,9 +40,9 @@ class user_profile(models.Model):
     avatar = models.ImageField(upload_to='profiles/', blank=True)
 
 
-class Business():
+class Business(models.Model):
     name = models.CharField(max_length=200)
-    profile = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
     email = models.EmailField(max_length=200)
 
@@ -94,6 +94,7 @@ class Post(models.Model):
 
 
 class Contact(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     department = models.CharField(max_length=50)
     phone = models.IntegerField()
     neighborhood = models.ForeignKey(Neighborhood, on_delete=models.CASCADE)
