@@ -11,6 +11,8 @@ pillow = "*"
 cloudinary = "*"
 django-bootstrap5 = "*"
 django-registration = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 autopep8 = "*"
