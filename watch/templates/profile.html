@@ -54,8 +54,8 @@
           data-bs-target="#postModal"
           >Add Post</a
         >
-        <a href="#" class="btn btn-outline-primary">Add Business</a>
-        <a href="#" class="btn btn-outline-primary">Add Contact</a>
+        <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addBusiness">Add Business</a>
+        <a href="#" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#addContact">Add Contact</a>
       </div>
     </div>
     <p class="card-text text-center" style="font-size: xx-large">
@@ -94,6 +94,73 @@
 </div>
 
 <!-- modals -->
+<!-- business modal -->
+<div>
+  <div class="modal fade" id="addBusiness" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Business</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+            <div class="modal-body">
+                <form action="{% url 'new_business' %}" method="post"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                        <label for="title">Business Name</label>
+                        <input type="text" class="form-control" value="" name="name" required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="title">Business Email</label>
+                        <input type="email" class="form-control" value="" name="email" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"
+                            name="description"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-outline-primary">Add</button>
+                </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <!-- contact modal -->
+<div class="">
+  <div class="modal fade" id="addContact" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Add Contact</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+              <form action="{% url 'new_contact' %}" method="post"
+                  enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="form-group mb-3">
+                      <label for="title">Department</label>
+                      <input type="text" class="form-control" value="" name="name" required>
+                  </div>
+                  <div class="form-group mb-3">
+                      <label for="title">Phone</label>
+                      <input type="number" class="form-control" value="" name="phone" required>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="submit" class="btn btn-outline-primary">Add</button>
+              </form>
+          </div>
+      </div>
+  </div>
+  </div>
+</div>
+<!-- profile modal -->
 <div
   class="modal fade"
   id="profileModal"
@@ -209,6 +276,7 @@
   </div>
 </div>
 
+<!-- post modal -->
 <div class="modal fade" id="postModal" tabindex="-1" role="dialog"
 aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">

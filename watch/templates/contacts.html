@@ -1,0 +1,17 @@
+{%extends "base.html"%} {%block content%}
+<p class="card-text text-center" style="font-size: xx-large">
+  {%for contact in contacts%} Contacts in {{contact.neighborhood}} {%endfor%}
+</p>
+<div class="row">
+  {%for contact in contacts%}
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Department Name: {{contact.department}}</h5>
+        <p class="card-text">Hotline: {{contact.phone}}</p>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%}

@@ -1,0 +1,19 @@
+{%extends "base.html"%} {%block content%}
+<p class="card-text text-center" style="font-size: xx-large">
+  {%for business in businesses%} Businesses in {{business.neighborhood}}
+  {%endfor%}
+</p>
+<div class="row">
+  {%for business in businesses%}
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Name: {{business.name}}</h5>
+        <p class="card-text">Owner: {{business.user.user_profile.name}}</p>
+        <p class="card-text">Email: {{business.email}}</p>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%}
