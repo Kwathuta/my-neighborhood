@@ -39,6 +39,12 @@ class user_profile(models.Model):
     email = models.EmailField(max_length=200)
     avatar = models.ImageField(upload_to='profiles/', blank=True)
 
+    def __str__(self):
+        return self.name
+
+    def save_user_profile(self):
+        self.save()
+
 
 class Business(models.Model):
     name = models.CharField(max_length=200)

@@ -59,10 +59,10 @@ def update_profile(request):
                 user_id=current_user.id,
                 name=name,
                 avatar=avatar,
-                neighbourhood=neighborhood,
+                neighborhood=neighborhood,
             )
 
-            profile.save_profile()
+            profile.save_user_profile()
 
         user.first_name = first_name
         user.last_name = last_name
@@ -74,7 +74,7 @@ def update_profile(request):
         return redirect("/profile", {"success": "Profile Updated Successfully"})
 
     else:
-        return render(request, "profile.html", {"danger": "Profile Update Failed"})
+        return render(request, "profile.html", {"failed": "Profile Update Failed"})
 
 
 def profile(request):
@@ -99,7 +99,53 @@ def posts(request):
         contacts = Contact.objects.filter(user_id=current_user.id)
         return render(request, "profile.html", {"res": "Please select your neighborhood to see posts", "neighborhood": neighborhood, "businesses": businesses, "contacts": contacts, "posts": posts})
     else:
-        neighborhood = profile.neighbourhood
+        neighborhood = profile.neighborhood
         posts = Post.objects.filter(
             neighborhood=neighborhood).order_by("-posted_at")
         return render(request, "posts.html", {"posts": posts})
+
+
+def new_post(request):
+    if request.method == "POST":
+        current_user = request.user
+        title = request.POST["title"]
+        description = request.POST["description"]
+
+        profile = user_profile.objects.filter(user_id=current_user.id).first()
+        if profile is None:
+            profile = user_profile.objects.filter(
+                user_id=current_user.id).first()
+            posts = Post.objects.filter(user_id=current_user.id)
+            neighborhood = Neighborhood.objects.all()
+            businesses = Business.objects.filter(user_id=current_user.id)
+            contacts = Contact.objects.filter(user_id=current_user.id)
+            return render(request, "profile.html", {"res": "Please update your neighborhood", "neighborhood": neighborhood, "businesses": businesses, "contacts": contacts, "posts": posts})
+        else:
+            neighborhood = profile.neighborhood
+
+        if request.FILES:
+            image = request.FILES["image"]
+
+            post = Post(
+                user_id=current_user.id,
+                title=title,
+                description=description,
+                image=image,
+                neighborhood=neighborhood,
+            )
+            post.create_post()
+
+            return redirect("/profile", {"success": "Post Created Successfully"})
+        else:
+            post = Post(
+                user_id=current_user.id,
+                title=title,
+                description=description,
+                neighborhood=neighborhood,
+            )
+            post.create_post()
+
+            return redirect("/profile", {"success": "Post Created Successfully"})
+
+    else:
+        return render(request, "profile.html", {"res": "Post Creation Failed"})
