@@ -1,0 +1,46 @@
+{%extends "base.html"%} {%block content%}
+<p class="card-text text-center" style="font-size: xx-large">
+  {%for post in posts%} Recent happenings in {{post.neighborhood}} {%endfor%}
+</p>
+<div class="row">
+  {%for post in posts%}
+  <div class="col-md-3">
+    <div class="card">
+      {%if post.image %}
+      <img src="{{post.image.url}}" class="card-img-top" alt="post" />
+      {%else%}
+      <img
+        src="https://images.pexels.com/photos/3601422/pexels-photo-3601422.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+        class="card-img-top"
+        alt="..."
+      />
+      {%endif%}
+      <div class="card-body">
+        <h5 class="card-title">{{post.title}}</h5>
+        <p class="card-text">{{post.neighborhood}}</p>
+        <p class="card-text">{{post.description}}</p>
+      </div>
+      <div
+        class="
+          card-footer
+          text-muted
+          d-flex
+          justify-content-between
+          align-items-center
+        "
+      >
+        <p class="card-text">{{post.posted_at | timesince}} ago</p>
+        <div class="d-flex align-items-center">
+          <img
+            src="{{post.user.user_profile.avatar.url}}"
+            alt="avatar"
+            style="height: 30px; width: 30px; border-radius: 50%"
+          />
+          <p class="card-text ms-1">{{post.user}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {%endfor%}
+</div>
+{%endblock%}
