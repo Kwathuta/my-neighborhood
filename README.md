@@ -31,6 +31,7 @@ This site was made entirely using:
 - Python|Django
 - SQLite3
 - Bootstrap
+- Hosted on Heroku
 
 ## Support and contact details
 
