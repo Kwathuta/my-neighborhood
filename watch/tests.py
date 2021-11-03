@@ -27,3 +27,27 @@ class NeighbourhoodTestClass(TestCase):
         self.neighborhood.delete()
         neighborhoods = Neighborhood.objects.all()
         self.assertTrue(len(neighborhoods) == 0)
+
+
+class PostTestClass(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='dev-kev',
+            password='password'
+        )
+        self.post = Post(title='Test Post', content='Test Content',
+                         location=self.location, category=self.category, user=self.user)
+
+    def test_instance(self):
+        self.assertTrue(isinstance(self.post, Post))
+
+    def test_save_method(self):
+        self.post.save()
+        posts = Post.objects.all()
+        self.assertTrue(len(posts) > 0)
+
+    def test_delete_method(self):
+        self.post.save()
+        self.post.delete_post()
+        posts = Post.objects.all()
+        self.assertTrue(len(posts) == 0)
